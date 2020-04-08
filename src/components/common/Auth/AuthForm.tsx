@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import RegularButton from "../Button/RegularButton";
+import useInputs from "../../../hooks/useInputs";
 
 const AuthFormContainer = styled.div`
   input ~ button {
@@ -40,20 +41,42 @@ const Footer = styled.footer`
 
 const AuthForm = () => {
   const { pathname } = useLocation();
+  const { value: email, onChange: emailOnChange } = useInputs("");
+  const { value: name, onChange: nameOnChange } = useInputs("");
+  const { value: password, onChange: passwordOnChange } = useInputs("");
+  const { value: passwordChk, onChange: passwordChkOnChange } = useInputs("");
 
   return (
     <AuthFormContainer>
       <form>
-        <StyledInput name="email" placeholder="이메일" />
+        <StyledInput
+          name="email"
+          placeholder="이메일"
+          value={email}
+          onChange={emailOnChange}
+        />
         {pathname === "/signup" && (
-          <StyledInput name="name" placeholder="닉네임" />
+          <StyledInput
+            name="name"
+            placeholder="닉네임"
+            value={name}
+            onChange={nameOnChange}
+          />
         )}
-        <StyledInput type="password" name="password" placeholder="비밀번호" />
+        <StyledInput
+          type="password"
+          name="password"
+          placeholder="비밀번호"
+          value={password}
+          onChange={passwordOnChange}
+        />
         {pathname === "/signup" && (
           <StyledInput
             type="password"
             name="password-check"
             placeholder="비밀번호 확인"
+            value={passwordChk}
+            onChange={passwordChkOnChange}
           />
         )}
         <RegularButton type="submit">

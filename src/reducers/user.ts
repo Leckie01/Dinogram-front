@@ -26,11 +26,16 @@ export interface ILoginInfo {
 export interface IUserInfo {
   id: number;
   email: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface ISigninInfo {
+export interface ISignupInfo {
   email: string;
+  name: string;
   password: string;
+  passwordChk: string;
 }
 
 export interface IInitialState {
@@ -81,7 +86,7 @@ export const signupAsync = createAsyncAction(
   SIGN_UP,
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR
-)<ISigninInfo, undefined, AxiosError>();
+)<ISignupInfo, IUserInfo, AxiosError>();
 
 const actions = { loginAsync, logoutAsync, signupAsync };
 type AsyncActionTypes = ActionType<typeof actions>;
