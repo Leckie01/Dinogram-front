@@ -2,10 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import rabbitPic from "../../assets/images/test-rabbit.jpg";
 import dinoPic from "../../assets/images/test-dino.png";
+import { IPost } from "../../reducers/post";
 
-interface IProps {
-  
-}
+interface IProps {}
 
 const FeedContainer = styled.div`
   width: 18rem;
@@ -61,23 +60,21 @@ const FeedUserInfo = styled.div`
   }
 `;
 
-const Feed: React.FC = () => {
+const Feed: React.FC<IPost> = ({ content, user }) => {
   return (
     <FeedContainer>
       <FeedImageContainer>
         <FeedImage src={rabbitPic} />
       </FeedImageContainer>
       <FeedContentWrapper>
-        <FeedContent>
-          아름이를 닮은 캐릭터랍니다. 아주아주 맘에 들어요!
-        </FeedContent>
+        <FeedContent>{content}</FeedContent>
         <div>
           <FeedUserInfo>
             <div>
               <img src={dinoPic} />
               <span>
                 {"by "}
-                <b>댕댕이</b>
+                <b>{user.name}</b>
               </span>
             </div>
             <div>❤</div>

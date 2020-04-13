@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 import theme from "../../../styles/theme";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../reducers";
+import { logoutAsync } from "../../../reducers/user";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -49,7 +52,16 @@ const UserMenu = styled.div`
 `;
 
 const Header = () => {
-  const logged = false;
+  const { isLoggedIn, user } = useSelector(({ user }: RootState) => user);
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      dispatch(logoutAsync.request());
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <HeaderContainer>
@@ -59,10 +71,11 @@ const Header = () => {
           </Logo>
         </Link>
         <HeaderRight>
-          {logged ? (
+          {user ? (
             <UserMenu>
+              <span>{`${user!.name}`}</span>
               <Button to="/write">피드 작성</Button>
-              <Button to="/logout">로그아웃</Button>
+              <Button onClick={onLogout}>로그아웃</Button>
             </UserMenu>
           ) : (
             <Button to="/login">로그인</Button>

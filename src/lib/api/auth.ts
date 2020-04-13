@@ -12,12 +12,17 @@ interface IRegister {
   passwordChk: string;
 }
 
-export const login = ({ email, password }: ILogin) => {
-  client.post("/user/login", { email, password });
-};
+export const login = async ({ email, password }: ILogin) =>
+  await client.post("/user/login", { email, password });
 
-export const register = ({ email, name, password, passwordChk }: IRegister) => {
-  client.post("/user/signup", { email, name, password, passwordChk });
-};
+export const logout = () => client.post("/user/logout");
 
-export const check = () => client.get("/user/check");
+export const register = async ({
+  email,
+  name,
+  password,
+  passwordChk
+}: IRegister) =>
+  await client.post("/user/signup", { email, name, password, passwordChk });
+
+export const check = async () => await client.get("/user/check");

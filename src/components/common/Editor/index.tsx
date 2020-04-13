@@ -5,6 +5,7 @@ import RegularButton from "../Button/RegularButton";
 import Button from "../Button";
 import DivButton from "../Button/DivButton";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const EditorForm = styled.form`
   height: 100vh;

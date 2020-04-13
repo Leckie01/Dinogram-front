@@ -21,12 +21,7 @@ const StyledButton = styled(Link)`
   }
 `;
 
-interface IProps {
-  to: string;
-  theme?: string;
-}
-
-const Button: React.FC<IProps> = ({ to, ...rest }) => {
-  return <StyledButton to={to} {...rest} />;
+const Button = (props: any) => {
+  return <StyledButton {...props} />;
 };
 export default Button;
